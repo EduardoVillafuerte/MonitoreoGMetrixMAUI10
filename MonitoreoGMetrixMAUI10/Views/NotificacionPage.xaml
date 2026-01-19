@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoreoGMetrixMAUI10.Views.NotificacionPage"
+             xmlns:viewmodel="clr-namespace:MonitoreoGMetrixMAUI10.ViewModels"
+             Title="Notificaciones">
+
+    <ContentPage.BindingContext>
+        <viewmodel:NotificacionViewModel />
+    </ContentPage.BindingContext>
+
+    <VerticalStackLayout Padding="20">
+
+        <Label Text="Correos seleccionados:"
+               FontSize="18"
+               FontAttributes="Bold"/>
+
+        <CollectionView ItemsSource="{Binding Correos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Label Text="{Binding}" />
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <CheckBox x:Name="chkEstudiante" IsChecked="True" />
+        <Label Text="Enviar al estudiante"/>
+
+        <CheckBox x:Name="chkDocente"/>
+        <Label Text="Enviar al docente"/>
+
+        <CheckBox x:Name="chkDirector"/>
+        <Label Text="Enviar al director"/>
+
+        <Button Text="Enviar Notificación"
+                Style="{StaticResource BotonUDLA}" />
+
+    </VerticalStackLayout>
+
+</ContentPage>

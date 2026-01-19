@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoreoGMetrixMAUI10.Views.DetallesPage"
+             xmlns:viewmodel="clr-namespace:MonitoreoGMetrixMAUI10.ViewModels"
+             xmlns:converters="clr-namespace:MonitoreoGMetrixMAUI10.Converters"
+             x:Name="Page"
+             BackgroundColor="#9d1333">
+
+    <ContentPage.BindingContext>
+        <viewmodel:DetallesViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="15" Spacing="15">
+
+                <Label Text="Detalle de Estudiantes"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       HorizontalOptions="Center" />
+
+                <CollectionView ItemsSource="{Binding Estudiantes}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="10" Margin="0,5" CornerRadius="10" HasShadow="True"
+                                   BackgroundColor="{Binding promedio, Converter={StaticResource ColorPromedioConverter}}">
+
+                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+
+                                    <Label Grid.Column="0" 
+                                           Text="{Binding UserName}" 
+                                           VerticalOptions="Center"
+                                           TextColor="Black" 
+                                           FontAttributes="Bold"/>
+
+                                    <Label Grid.Column="1" 
+                                           Text="{Binding promedio, StringFormat='Prom: {0}'}" 
+                                           VerticalOptions="Center"
+                                           TextColor="Black"/>
+
+                                    <Button Grid.Column="2"
+                                            Text="Intentos"
+                                            FontSize="12"
+                                            HeightRequest="35"
+                                            Padding="10,0"
+                                            CornerRadius="18"
+                                            Command="{Binding BindingContext.VerIntentosCommand, Source={x:Reference Name=Page}}"
+                                            CommandParameter="{Binding .}"
+                                            BackgroundColor="#9d1333"
+                                            TextColor="White"/>
+                                </Grid>
+
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid BackgroundColor="#80000000"
+              IsVisible="{Binding IsBusy}"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   Color="White"
+                                   HeightRequest="50" WidthRequest="50"/>
+                <Label Text="Cargando detalles..." 
+                       TextColor="White"
+                       FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

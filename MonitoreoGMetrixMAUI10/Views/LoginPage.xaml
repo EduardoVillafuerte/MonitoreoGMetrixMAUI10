@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoreoGMetrixMAUI10.Views.LoginPage"
+             NavigationPage.HasNavigationBar="False"
+             BackgroundColor="#9d1333" 
+             Title="Login">
+
+    <Grid>
+        <Grid Padding="30">
+            <VerticalStackLayout Spacing="20" VerticalOptions="Center">
+
+                <Image Source="udla_logo_blanco.png"
+                       HeightRequest="120"
+                       HorizontalOptions="Center"
+                       Aspect="AspectFit"
+                       Margin="0,0,0,20"/>
+
+                <Border BackgroundColor="White"
+                        StrokeThickness="0"
+                        HeightRequest="55"
+                        Padding="15,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="txtUsuario" 
+                           Text="{Binding Usuario}" 
+                           Placeholder="Usuario"
+                           PlaceholderColor="Black"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <Border BackgroundColor="White"
+                        StrokeThickness="0"
+                        HeightRequest="55"
+                        Padding="15,0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="30" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="txtClave" 
+                           Text="{Binding Contrasena}" 
+                           Placeholder="Contraseña"
+                           IsPassword="True"
+                           PlaceholderColor="Black"
+                           TextColor="Black"
+                           BackgroundColor="Transparent"
+                           VerticalOptions="Center"/>
+                </Border>
+
+                <Button Text="Iniciar Sesión"
+                        BackgroundColor="#111111"
+                        TextColor="White"
+                        CornerRadius="30"
+                        HeightRequest="55"
+                        FontAttributes="Bold"
+                        Command="{Binding LoginCommand}"
+                        Margin="0,10,0,0"/>
+
+            </VerticalStackLayout>
+        </Grid>
+
+        <Grid BackgroundColor="#80000000"
+              IsVisible="{Binding IsBusy}"
+              HorizontalOptions="Fill" 
+              VerticalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                                   Color="White" 
+                                   HeightRequest="50" WidthRequest="50"/>
+                <Label Text="Iniciando sesión..." 
+                       TextColor="White" 
+                       FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>

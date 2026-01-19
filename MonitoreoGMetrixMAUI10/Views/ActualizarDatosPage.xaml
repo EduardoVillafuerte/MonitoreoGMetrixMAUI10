@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoreoGMetrixMAUI10.Views.ActualizarDatosPage"
+             Title="ActualizarDatosPage">
+
+    <Grid>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Actualizar Datos"
+                   FontSize="22"
+                   TextColor="#9d1333"
+                   FontAttributes="Bold"/>
+
+            <Button Text="Seleccionar archivo CSV"
+                    BackgroundColor="#9d1333"
+                    TextColor="White"
+                    Clicked="BtnSeleccionarArchivo_Clicked"/>
+
+            <Label x:Name="lblArchivo" Text="Archivo no seleccionado"/>
+
+            <Button Text="Subir"
+                    BackgroundColor="#9d1333"
+                    TextColor="White"
+                    Clicked="BtnSubir_Clicked"/>
+
+        </VerticalStackLayout>
+
+        <Grid x:Name="loadingOverlay"
+                  BackgroundColor="#90000000"
+                  IsVisible="False"
+                  HorizontalOptions="Fill"
+                  VerticalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                <ActivityIndicator IsRunning="True" Color="White"/>
+                <Label Text="Subiendo archivo..." TextColor="White"/>
+            </VerticalStackLayout>
+        </Grid>
+    </Grid>
+
+</ContentPage>

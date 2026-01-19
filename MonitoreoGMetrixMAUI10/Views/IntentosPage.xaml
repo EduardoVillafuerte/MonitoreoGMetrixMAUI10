@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MonitoreoGMetrixMAUI10.Views.IntentosPage"
+             BackgroundColor="#9d1333">
+
+    <Grid>
+        <ScrollView Padding="15">
+            <VerticalStackLayout Spacing="15">
+
+                <Label Text="Historial de Intentos"
+                       TextColor="White"
+                       FontAttributes="Bold"
+                       FontSize="20"
+                       HorizontalOptions="Center" />
+
+                <CollectionView ItemsSource="{Binding Intentos}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Frame Padding="15" Margin="0,5" CornerRadius="10" HasShadow="True" BackgroundColor="White">
+                                <VerticalStackLayout Spacing="5">
+
+                                    <Label Text="{Binding pruebaNombre}" 
+                                           FontAttributes="Bold" 
+                                           TextColor="Black" 
+                                           FontSize="16"/>
+
+                                    <Grid ColumnDefinitions="*,*">
+                                        <Label Grid.Column="0" 
+                                               Text="{Binding score, StringFormat='Puntuación: {0}'}" 
+                                               TextColor="#333333"/>
+
+                                        <Label Grid.Column="1" 
+                                               Text="{Binding completeDate, StringFormat='{0:dd/MM/yyyy}'}" 
+                                               TextColor="#555555" 
+                                               HorizontalOptions="End"/>
+                                    </Grid>
+
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Grid BackgroundColor="#80000000"
+              IsVisible="{Binding IsBusy}"
+              HorizontalOptions="Fill"
+              VerticalOptions="Fill">
+            <VerticalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="15">
+                <ActivityIndicator IsRunning="{Binding IsBusy}"
+                                   Color="White"
+                                   HeightRequest="50"
+                                   WidthRequest="50"/>
+                <Label Text="Cargando intentos..."
+                       TextColor="White"
+                       FontAttributes="Bold"/>
+            </VerticalStackLayout>
+        </Grid>
+
+    </Grid>
+</ContentPage>
