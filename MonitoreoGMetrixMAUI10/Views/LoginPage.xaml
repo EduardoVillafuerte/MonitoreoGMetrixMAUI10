@@ -15,6 +15,12 @@
                        HorizontalOptions="Center"
                        Aspect="AspectFit"
                        Margin="0,0,0,20"/>
+                
+                <Image Source="logogmetrix.png"
+                       HeightRequest="30"
+                       HorizontalOptions="Center"
+                       Aspect="AspectFit"
+                       Margin="0,0,0,20"/>
 
                 <Border BackgroundColor="White"
                         StrokeThickness="0"

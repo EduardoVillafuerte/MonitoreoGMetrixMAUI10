@@ -3,38 +3,67 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MonitoreoGMetrixMAUI10.Views.NotificacionPage"
              xmlns:viewmodel="clr-namespace:MonitoreoGMetrixMAUI10.ViewModels"
-             Title="Notificaciones">
+             Title="Notificaciones"
+            BackgroundColor="#9d1333">
 
     <ContentPage.BindingContext>
         <viewmodel:NotificacionViewModel />
     </ContentPage.BindingContext>
 
-    <VerticalStackLayout Padding="20">
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
 
-        <Label Text="Correos seleccionados:"
-               FontSize="18"
-               FontAttributes="Bold"/>
+            <Label FontSize="16">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="*" TextColor="#DC3545" FontSize="18"/>
+                        <Span Text=" Se enviará una notificación de alerta a los siguientes correos:" 
+                              FontAttributes="Bold" 
+                              TextColor="white"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
 
-        <CollectionView ItemsSource="{Binding Correos}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Label Text="{Binding}" />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <Frame BorderColor="#000000" CornerRadius="5" Padding="0" HasShadow="False" Background="White">
+                <CollectionView ItemsSource="{Binding Correos}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <VerticalStackLayout>
+                                <HorizontalStackLayout Padding="15,10" Spacing="10">
+                                    <Label Text="*" TextColor="#DC3545"/>
+                                    <Label Text="{Binding}" TextColor="#212529"/>
+                                </HorizontalStackLayout>
+                                <BoxView HeightRequest="1" Color="#DEE2E6"/>
+                            </VerticalStackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
 
-        <CheckBox x:Name="chkEstudiante" IsChecked="True" />
-        <Label Text="Enviar al estudiante"/>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox IsChecked="True" IsEnabled="False" Color="#ffffff"/>
+                <Label Text="Enviar notificación al estudiante" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-        <CheckBox x:Name="chkDocente"/>
-        <Label Text="Enviar al docente"/>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox IsChecked="False" Color="#ffffff"/>
+                <Label Text="Enviar notificación al docente" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-        <CheckBox x:Name="chkDirector"/>
-        <Label Text="Enviar al director"/>
+            <HorizontalStackLayout Spacing="10">
+                <CheckBox IsChecked="False" Color="#ffffff"/>
+                <Label Text="Enviar notificación al director de carrera" VerticalOptions="Center"/>
+            </HorizontalStackLayout>
 
-        <Button Text="Enviar Notificación"
-                Style="{StaticResource BotonUDLA}" />
+            <Button Text="Enviar Notificación"
+                    Command="{Binding EnviarCommand}"
+                    BackgroundColor="White"
+                    TextColor="#9d1333"
+                    FontAttributes="Bold"
+                    CornerRadius="20"
+                    HorizontalOptions="Fill"
+                    Margin="0,0,0,10"/>
 
-    </VerticalStackLayout>
-
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

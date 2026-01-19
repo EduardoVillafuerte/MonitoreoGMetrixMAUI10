@@ -7,6 +7,7 @@
         public string? LastName { get; set; }
         public decimal? promedio {get;set;}
         public string? tiempoPromedio {get;set;}
+        public bool IsSelected { get; set; }
     }
     public class DetallesFiltrados
     {

@@ -11,8 +11,9 @@
         <viewmodel:DetallesViewModel />
     </ContentPage.BindingContext>
 
-    <Grid>
-        <ScrollView>
+    <Grid RowDefinitions="*, Auto">
+
+        <ScrollView Grid.Row="0">
             <VerticalStackLayout Padding="15" Spacing="15">
 
                 <Label Text="Detalle de Estudiantes"
@@ -27,20 +28,25 @@
                             <Frame Padding="10" Margin="0,5" CornerRadius="10" HasShadow="True"
                                    BackgroundColor="{Binding promedio, Converter={StaticResource ColorPromedioConverter}}">
 
-                                <Grid ColumnDefinitions="*,Auto,Auto" ColumnSpacing="10">
+                                <Grid ColumnDefinitions="Auto,*,Auto,Auto" ColumnSpacing="10">
 
-                                    <Label Grid.Column="0" 
+                                    <CheckBox Grid.Column="0" 
+                                              IsChecked="{Binding IsSelected}" 
+                                              Color="#ffffff"
+                                              VerticalOptions="Center"/>
+
+                                    <Label Grid.Column="1" 
                                            Text="{Binding UserName}" 
                                            VerticalOptions="Center"
                                            TextColor="Black" 
                                            FontAttributes="Bold"/>
 
-                                    <Label Grid.Column="1" 
+                                    <Label Grid.Column="2" 
                                            Text="{Binding promedio, StringFormat='Prom: {0}'}" 
                                            VerticalOptions="Center"
                                            TextColor="Black"/>
 
-                                    <Button Grid.Column="2"
+                                    <Button Grid.Column="3"
                                             Text="Intentos"
                                             FontSize="12"
                                             HeightRequest="35"
@@ -60,7 +66,38 @@
             </VerticalStackLayout>
         </ScrollView>
 
-        <Grid BackgroundColor="#80000000"
+        <Grid Grid.Row="1" ColumnDefinitions="*,*" ColumnSpacing="15" Padding="20" BackgroundColor="#9d1333">
+
+            <Button Grid.Column="0"
+                    Text="Enviar Notificación" 
+                    Command="{Binding EnviarNotificacionesCommand}"
+                    BackgroundColor="White" 
+                    TextColor="#9d1333" 
+                    BorderColor="White" 
+                    BorderWidth="1"
+                    FontAttributes="Bold"
+                    CornerRadius="20"/>
+
+            <Button Grid.Column="1"
+                    Text="🤖 Notificaciones de Riesgo"
+                    Command="{Binding VerPrediccionesCommand}"
+                    TextColor="White"
+                    FontAttributes="Bold"
+                    CornerRadius="20"
+                    Shadow="{Shadow Brush=Black, Offset='2,2', Opacity=0.3}">
+
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                        <GradientStop Color="#00C6FF" Offset="0.0" />
+                        <GradientStop Color="#9D50BB" Offset="1.0" />
+                    </LinearGradientBrush>
+                </Button.Background>
+
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="0" Grid.RowSpan="2"
+              BackgroundColor="#80000000"
               IsVisible="{Binding IsBusy}"
               HorizontalOptions="Fill"
               VerticalOptions="Fill">
@@ -73,6 +110,7 @@
                        FontAttributes="Bold"/>
             </VerticalStackLayout>
         </Grid>
+
     </Grid>
 
 </ContentPage>

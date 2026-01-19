@@ -44,7 +44,7 @@ namespace MonitoreoGMetrixMAUI10.ViewModels
                 // -------------------------
                 // 🔥 LOGIN CON DATOS QUEMADOS
                 // -------------------------
-                if (Usuario == "admin" && Contrasena == "1234")
+                if (Usuario == "edison.villafuerte@udla.edu.ec" && Contrasena == "1234")
                 {
                     // Cambiar a Flyout + Shell Navigation
                     Application.Current.MainPage = new AppShell();

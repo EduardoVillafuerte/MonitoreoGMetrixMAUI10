@@ -9,6 +9,8 @@ namespace MonitoreoGMetrixMAUI10
             InitializeComponent();
             Routing.RegisterRoute(nameof(DetallesPage), typeof(DetallesPage));
             Routing.RegisterRoute(nameof(IntentosPage), typeof(IntentosPage));
+            Routing.RegisterRoute(nameof(NotificacionPage), typeof(NotificacionPage));
+            Routing.RegisterRoute(nameof(PrediccionesPage), typeof(PrediccionesPage));
         }
     }
 }

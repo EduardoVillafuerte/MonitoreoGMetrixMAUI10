@@ -33,11 +33,15 @@ namespace MonitoreoGMetrixMAUI10.ViewModels
         public Chart GraficoPie { get; set; }
 
         public ICommand VerIntentosCommand { get; }
+        public ICommand EnviarNotificacionesCommand { get; }
+        public ICommand VerPrediccionesCommand { get; } 
 
         public DetallesViewModel()
         {
             _service = new ReportesService();
             VerIntentosCommand = new Command<DetallesModel>(async (m) => await AbrirIntentos(m));
+            EnviarNotificacionesCommand = new Command(async () => await IrANotificaciones());
+            VerPrediccionesCommand = new Command(async () => await IrAPredicciones());
         }
 
         public DetallesViewModel(string nrc, int periodo, string certificacion, string materia)
@@ -120,9 +124,31 @@ namespace MonitoreoGMetrixMAUI10.ViewModels
             };
         }
 
-        // =====================================
-        // NAVEGAR A INTENTOS
-        // =====================================
+        private async Task IrANotificaciones()
+        {
+            // 1. Filtrar los seleccionados
+            var seleccionados = Estudiantes.Where(e => e.IsSelected)
+                                           .Select(e => e.UserName)
+                                           .ToList();
+
+            if (!seleccionados.Any())
+            {
+                await Application.Current.MainPage.DisplayAlert("Aviso", "Seleccione al menos un estudiante para enviar la notificación.", "OK");
+                return;
+            }
+
+            // 2. Preparar parámetros para la navegación
+            var navParams = new Dictionary<string, object>
+            {
+                { "Correos", new ObservableCollection<string>(seleccionados) }
+            };
+
+            // 3. Navegar a NotificacionPage
+            // Asegúrate de tener registrada la ruta "NotificacionPage" en tu AppShell o usa nameof(NotificacionPage) si tienes la referencia
+            await Shell.Current.GoToAsync(nameof(NotificacionPage), navParams);
+        }
+
+        // ... (tu método AbrirIntentos existente) ...
         private async Task AbrirIntentos(DetallesModel d)
         {
             var navParams = new Dictionary<string, object>
@@ -134,5 +160,17 @@ namespace MonitoreoGMetrixMAUI10.ViewModels
 
             await Shell.Current.GoToAsync(nameof(IntentosPage), navParams);
         }
+        private async Task IrAPredicciones()
+        {
+            var navParams = new Dictionary<string, object>
+        {
+            { "NRC", NRC },
+            { "PeriodoID", PeriodoID }
+        };
+
+            // Navegar a la página recién creada
+            await Shell.Current.GoToAsync(nameof(Views.PrediccionesPage), navParams);
+        }
+
     }
 }

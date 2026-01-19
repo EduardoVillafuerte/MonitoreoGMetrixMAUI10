@@ -85,6 +85,9 @@
 	  <MauiXaml Update="Views\NotificacionPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\PrediccionesPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\ReportePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

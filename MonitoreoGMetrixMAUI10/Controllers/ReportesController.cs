@@ -106,5 +106,20 @@ namespace MonitoreoGMetrixMAUI10.Controllers
         {
             return seleccionados; // En MAUI no usamos PartialViews
         }
+
+        //LISTA PREDICCIONES IA
+        public async Task<List<NotificacionRiesgo>> ObtenerPrediccionesAsync(string NRC, int periodo)
+        {
+            try
+            {
+                var url = $"PrediccionesIA?Periodo={periodo}&NRC={NRC}";
+                var datos = await _http.GetFromJsonAsync<List<NotificacionRiesgo>>(url);
+                return datos ?? new List<NotificacionRiesgo>();
+            }
+            catch
+            {
+                return new List<NotificacionRiesgo>();
+            }
+        }
     }
 }
